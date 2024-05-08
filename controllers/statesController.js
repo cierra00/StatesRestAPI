@@ -39,12 +39,12 @@ const getState = async(req, res) =>{
 
 const getFunFact = async(req, res) =>{
     const code = req.code;
-    const data = statesData.find(stateName => stateName.code === code);
+    const state = statesData.find(stateName => stateName.code === code);
     const dbState = await State.findOne({ stateCode: code }).exec();
 
     if (dbState.funfacts?.length < 1) { 
         return res.status(404).json({ 
-            'message': `No Fun Facts found for ${data.state}`
+            'message': `No Fun Facts found for ${state.state}`
          });
     }
     const INDEX = Math.floor(Math.random() * dbState.funfacts.length);
