@@ -57,13 +57,19 @@ const getCapital = async(req, res) =>{
     res.json({ 'state': state.state, 'capital': state.capital_city })
 }
 const getNickname= async(req, res) =>{
-    const code = req.code
+    const code = req.code;
+    const state = statesData.find(state => state.code === code);
+    res.json({ 'state': state.state, 'nickname': state.nickname })
 }
 const getPopulation = async(req, res) =>{
-    const code = req.code
+    const code = req.code;
+    const state = statesData.find(state => state.code === code);
+    res.json({ 'state': state.state, 'population': state.population })
 }
 const getAdmission = async(req, res) =>{
     const code = req.code;
+    const state = statesData.find(state => state.code === code);
+    res.json({ 'state': state.state, 'admitted': state.admission_date })
 }
 
 const createNewFunfacts = async(req, res) =>{
