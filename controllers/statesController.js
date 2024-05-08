@@ -64,7 +64,7 @@ const getNickname= async(req, res) =>{
 const getPopulation = async(req, res) =>{
     const code = req.code;
     const state = statesData.find(state => state.code === code);
-    res.json({ 'state': state.state, 'population': state.population })
+    res.json({ 'state': state.state, 'population': state.population.toLocaleString('en-US') })
 }
 const getAdmission = async(req, res) =>{
     const code = req.code;
