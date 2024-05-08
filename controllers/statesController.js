@@ -109,7 +109,7 @@ const createNewFunfacts = async(req, res) =>{
 const updateState = async(req, res) =>{
     const code = req.code;
     let { index, funfact } = req?.body;
-    index -= 1;
+    index = index -1;
 
     if (!index){
         return res.status(400).json({ 
@@ -126,8 +126,7 @@ const updateState = async(req, res) =>{
 
     if (!dbState?.funfacts?.length){
         return res.status(404).json({ 
-            'message': `No Fun Facts found for ${state.state}` 
-        })
+            'message': `No Fun Facts found for ${state.state}` })
     }
 
     if (!dbState.funfacts[index]){
