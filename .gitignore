@@ -1,0 +1,20 @@
+# Ignore files ending with .log
+*.log
+
+# Ignore a specific directory named "node_modules"
+node_modules/
+
+# Ignore all .txt files in the root directory and its subdirectories
+*.txt
+
+# Ignore files named "config.json" anywhere in the repository
+**/config.json
+
+/*.env
+/controllers/employeesController.js
+/model/User.js 
+/model/Employee.js
+/model/employees.json
+routes/api/employees.js
+__server.js
+corsOptions.js
