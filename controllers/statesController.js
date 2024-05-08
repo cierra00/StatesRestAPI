@@ -131,12 +131,9 @@ const updateState = async(req, res) =>{
             'message': `No Fun Fact found at that index for ${state.state}` 
         })
     }
-
     
     statesDB.funfacts[index] = funfact;
-
     const result = await statesDB.save();
-
     res.json(result)
 }
 
