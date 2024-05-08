@@ -38,30 +38,30 @@ const getState = async(req, res) =>{
 
 
 const getFunFact = async(req, res) =>{
-    console.log(req);
+    const code = req.code;
+    const data = statesData.find(stateName => stateName.code === code);
 }
 const getCapital = async(req, res) =>{
-    console.log(req);
+    const code = req.code
 }
 const getNickname= async(req, res) =>{
-    console.log(req);
+    const code = req.code
 }
 const getPopulation = async(req, res) =>{
-    console.log(req);
+    const code = req.code
 }
 const getAdmission = async(req, res) =>{
-    console.log(req);
+    const code = req.code
 }
 
 const createNewFunfacts = async(req, res) =>{
     console.log(req);
 }
 const updateState = async(req, res) =>{
-    console.log(req);
+    const code = req.code
 }
 const deleteState = async(req, res) =>{
-    console.log(req);
-}
+    const code = req.code
 
 
 module.exports = {
