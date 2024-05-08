@@ -109,7 +109,7 @@ const createNewFunfacts = async(req, res) =>{
 const updateState = async(req, res) =>{
     const code = req.code;
     let { index, funfact } = req?.body;
-    index = index -1;
+    index -= 1;
 
     if (!index){
         return res.status(400).json({ 
@@ -161,8 +161,8 @@ const deleteState = async(req, res) =>{
         })
     }
   
-    const newFunFacts = savedState.funfacts.filter((ff, i) => i !== index);
-    savedState.funfacts = newFunFacts;
+    const filteredData = savedState.funfacts.filter((funfact, i) => i !== index);
+    savedState.funfacts = filteredData;
     const result = await savedState.save(); 
     res.json(result)
 
