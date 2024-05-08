@@ -112,7 +112,7 @@ const updateState = async(req, res) =>{
 
     if (!index) return res.status(400).json({ 'message': 'State fun fact index value required' })
 
-    index = index - 1;
+    index -= 1;
 
     if (!funfact) return res.status(400).json({ 'message': 'State fun fact value required' })
 
