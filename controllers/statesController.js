@@ -122,15 +122,15 @@ const updateState = async(req, res) =>{
 
     const state = statesData.find(state => state.code === code)
 
-    const savedState = await State.findOne({ stateCode: code }).exec();
+    const dbState = await State.findOne({ stateCode: code }).exec();
 
-    if (!savedState?.funfacts?.length){
+    if (!dbState?.funfacts?.length){
         return res.status(404).json({ 
             'message': `No Fun Facts found for ${state.state}` 
         })
     }
 
-    if (!savedState.funfacts[index]){
+    if (!dbState.funfacts[index]){
         return res.status(404).json({ 
             'message': `No Fun Fact found at that index for ${state.state}` 
         })
