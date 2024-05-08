@@ -52,7 +52,9 @@ const getFunFact = async(req, res) =>{
     return res.json({'funfact': randomFunfact})
 }
 const getCapital = async(req, res) =>{
-    const code = req.code
+    const code = req.code;
+    const state = statesData.find(state => state.code === code);
+    res.json({ 'state': state.state, 'capital': state.capital_city })
 }
 const getNickname= async(req, res) =>{
     const code = req.code
