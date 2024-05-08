@@ -2,7 +2,7 @@ const statesData = require('../model/statesData.json');
 
 const validateState = () => {
     return (req, res, next) => {     
-        const providedStateAbbr = req.params.stateName.toUpperCase();
+        const providedStateAbbr = req.params.state.toUpperCase();
         const stateAbbreviations = statesData.map(stateName => stateName.code);
         const confirmState = stateAbbreviations.find(code => code === providedStateAbbr);
         if (!confirmState) {
