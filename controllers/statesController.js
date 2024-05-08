@@ -28,6 +28,7 @@ const getAllStates =  async (req, res) =>{
 }
 
 
+
 module.exports = {
     getAllStates,
     getState,
