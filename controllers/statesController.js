@@ -39,7 +39,7 @@ const getState = async(req, res) =>{
 
 const getFunFact = async(req, res) =>{
     const code = req.code;
-    // const data = statesData.find(stateName => stateName.code === code);
+    const data = statesData.find(stateName => stateName.code === code);
     const dbState = await State.findOne({ stateCode: code }).exec();
 
     if (dbState.funfacts?.length < 1) { 
