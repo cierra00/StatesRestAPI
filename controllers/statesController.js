@@ -119,16 +119,16 @@ const updateState = async(req, res) =>{
     const state = statesData.find(state => state.code === code)
 
    
-    const savedState = await State.findOne({ stateCode: code }).exec();
+    const statesDB = await State.findOne({ stateCode: code }).exec();
     
-    if (!savedState?.funfacts?.length) return res.status(404).json({ 'message': `No Fun Facts found for ${state.state}` })
+    if (!statesDB?.funfacts?.length) return res.status(404).json({ 'message': `No Fun Facts found for ${state.state}` })
 
-    if (!savedState.funfacts[index]) return res.status(404).json({ 'message': `No Fun Fact found at that index for ${state.state}` })
+    if (!statesDB.funfacts[index]) return res.status(404).json({ 'message': `No Fun Fact found at that index for ${state.state}` })
 
     
-    savedState.funfacts[index] = funfact;
+    statesDB.funfacts[index] = funfact;
 
-    const result = await savedState.save();
+    const result = await statesDB.save();
 
     res.json(result)
 }
@@ -156,9 +156,9 @@ const deleteState = async(req, res) =>{
         })
     }
   
-    const filteredData = savedState.funfacts.filter((funfact, i) => i !== index);
-    savedState.funfacts = filteredData;
-    const result = await savedState.save(); 
+    const filteredData = statesDB.funfacts.filter((funfact, i) => i !== index);
+    statesDB.funfacts = filteredData;
+    const result = await statesDB.save(); 
     res.json(result)
 
 }
