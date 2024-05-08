@@ -115,19 +115,22 @@ const updateState = async(req, res) =>{
             'message': 'State fun fact index value required' 
         })
     }
-
     index -= 1;
-
     if (!funfact) return res.status(400).json({ 'message': 'State fun fact value required' })
-
-    const state = statesData.find(state => state.code === code)
-
-   
+    const state = statesData.find(state => state.code === code);   
     const statesDB = await State.findOne({ stateCode: code }).exec();
     
-    if (!statesDB?.funfacts?.length) return res.status(404).json({ 'message': `No Fun Facts found for ${state.state}` })
+    if (!statesDB?.funfacts?.length){
+        return res.status(404).json({ 
+            'message': `No Fun Facts found for ${state.state}` 
+        })
+    }
 
-    if (!statesDB.funfacts[index]) return res.status(404).json({ 'message': `No Fun Fact found at that index for ${state.state}` })
+    if (!statesDB.funfacts[index]){
+        return res.status(404).json({ 
+            'message': `No Fun Fact found at that index for ${state.state}` 
+        })
+    }
 
     
     statesDB.funfacts[index] = funfact;
@@ -142,7 +145,9 @@ const deleteState = async(req, res) =>{
     let { index } = req?.body;
 
     if (!index){
-        return res.status(400).json({ 'message': 'State fun fact index value required' })
+        return res.status(400).json({ 
+            'message': 'State fun fact index value required' 
+        })
     }
     index -=1;
     const state = statesData.find(state => state.code === code);
