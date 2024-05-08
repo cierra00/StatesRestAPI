@@ -75,11 +75,29 @@ const getAdmission = async(req, res) =>{
 const createNewFunfacts = async(req, res) =>{
     const code = req.code;
     const { funfacts } = req?.body;
+    let result = []
 
     if (!funfacts){
         return res.status(400).json({ 
             'message': 'State fun facts value required' 
         })
+    }
+    if (!Array.isArray(funfacts)){
+        return res.status(400).json({ 
+            'message': 'State fun facts value must be an array' 
+        })
+    }
+    
+    const dbState = await State.findOne({ stateCode: code }).exec();
+    if (!dbState){
+        result = await State.create({
+            stateCode: code,
+            funfacts
+        });
+    } else {
+        dbState.funfacts = [dbState.funfacts, ...funfacts];
+        result = await dbState.save();
+        return res.json(result);
     }
 }
 const updateState = async(req, res) =>{
