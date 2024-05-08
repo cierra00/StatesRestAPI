@@ -42,7 +42,7 @@ const getFunFact = async(req, res) =>{
     const state = statesData.find(state => state.code === code);
     const dbState = await State.findOne({ stateCode: code }).exec();
 
-    if (!dbState.funfacts?.length) { 
+    if (!dbState?.funfacts?.length) { 
         return res.status(404).json({ 
             'message': `No Fun Facts found for ${state.state}`
          });
@@ -63,7 +63,7 @@ const getPopulation = async(req, res) =>{
     const code = req.code
 }
 const getAdmission = async(req, res) =>{
-    const code = req.code
+    const code = req.code;
 }
 
 const createNewFunfacts = async(req, res) =>{
