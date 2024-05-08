@@ -18,7 +18,7 @@ const getAllStates =  async (req, res) =>{
 
   allStates.map((state)=>{
        const matchState = statesDB.find(
-        stateName=> stateName.stateCode===state.code);
+        stateName => stateName.stateCode===state.code);
        if(matchState){
         state.funfacts = [...matchState.funfacts];
        }
@@ -26,8 +26,17 @@ const getAllStates =  async (req, res) =>{
    res.json(allStates);
 }
 const getState = async(req, res) =>{
-    console.log(req);
+    const code = req.code;
+    const data = statesData.find(stateName => stateName.code === code);
+    const dbState = await State.findOne({ stateCode: code }).exec();
+
+    if (dbState) { 
+        data.funfacts = [...dbState.funfacts]
+    }
+    return res.json(data)
 }
+
+
 const getFunFact = async(req, res) =>{
     console.log(req);
 }
