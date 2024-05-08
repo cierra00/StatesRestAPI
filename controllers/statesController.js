@@ -27,13 +27,13 @@ const getAllStates =  async (req, res) =>{
 }
 const getState = async(req, res) =>{
     const code = req.code;
-    const state = statesData.find(stateName => stateName.code === code);
+    const data = statesData.find(stateName => stateName.code === code);
     const dbState = await State.findOne({ stateCode: code }).exec();
 
     if (dbState) { 
-        state.funfacts = [...dbState.funfacts]
+        data.funfacts = [...dbState.funfacts]
     }
-    return res.json(state)
+    return res.json(data)
 }
 
 
