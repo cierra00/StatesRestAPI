@@ -108,33 +108,35 @@ const createNewFunfacts = async(req, res) =>{
 }
 const updateState = async(req, res) =>{
     const code = req.code;
-    let { index, funfact } = req?.body;
+    let { index, funfact } = req?.body; // destructure body data 
+
+    if (!index) return res.status(400).json({ 'message': 'State fun fact index value required' })
+
+    // adjust for 0 index of array
     index = index - 1;
 
-    if (!index){
-        return res.status(400).json({ 
-            'message': 'State fun fact index value required' 
-        })
-    }
-   if (!funfact){
-        return res.status(400).json({ 'message': 'State fun fact value required' })
-    }
-    const state = statesData.find(state => state.code === code)
-    const statesDB = await State.findOne({ stateCode: code }).exec();
+    if (!funfact) return res.status(400).json({ 'message': 'State fun fact value required' })
 
-    if (!statesDB?.funfacts?.length){
-        return res.status(404).json({ 
-            'message': `No Fun Facts found for ${state.state}` })
-    }
+    // find specific state in JSON data 
+    const state = statesJSONData.find(state => state.code === code)
 
-    if (!statesDB.funfacts[index]){
-        return res.status(404).json({ 
-            'message': `No Fun Fact found at that index for ${state.state}` 
-        })
-    }
-    statesDB.funfacts[index] = funfact;   
-    const result = await statesDB.save();   
+    // find state in MongoDB collection
+    const savedState = await State.findOne({ stateCode: code }).exec();
+
+    // Checking if the savedState exists and if it does,  
+    // using Optional Chaining (?.) to confirm the savedState 
+    // has a funfacts array and the array is not empty
+    if (!savedState?.funfacts?.length) return res.status(404).json({ 'message': `No Fun Facts found for ${state.state}` })
+
+    if (!savedState.funfacts[index]) return res.status(404).json({ 'message': `No Fun Fact found at that index for ${state.state}` })
+
+    // Update funfact at specified index
+    savedState.funfacts[index] = funfact;
+    // Save state in MongoDB
+    const result = await savedState.save();
+    // Send response
     res.json(result)
+}
 }
 const deleteState = async(req, res) =>{
     const code = req.code;
