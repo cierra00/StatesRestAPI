@@ -27,13 +27,13 @@ const getAllStates =  async (req, res) =>{
 }
 const getState = async(req, res) =>{
     const code = req.code;
-    const data = statesData.find(stateName => stateName.code === code);
+    const state = statesData.find(stateName => stateName.code === code);
     const dbState = await State.findOne({ stateCode: code }).exec();
 
     if (dbState) { 
-        data.funfacts = [...dbState.funfacts]
+        state.funfacts = [...dbState.funfacts]
     }
-    return res.json(data)
+    return res.json(state)
 }
 
 
@@ -47,7 +47,7 @@ const getFunFact = async(req, res) =>{
             'message': `No Fun Facts found for ${data.state}`
          });
     }
-    const randomFunfact = dbState[Math.floor()* dbState.funfacts.length];
+    const randomFunfact = dbState[Math.floor(Math.random()* dbState.funfacts.length)];
     return res.json({'funfact': randomFunfact})
 }
 const getCapital = async(req, res) =>{
