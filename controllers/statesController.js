@@ -8,7 +8,7 @@ const getAllStates =  async (req, res) =>{
 
     if (contig === 'false') {
         allStates = allStates.filter(
-            state => stateName.code === 'AK' || stateName.code === 'HI');
+            stateName => stateName.code === 'AK' || stateName.code === 'HI');
     } 
     if(contig === 'true') {  
         allStates = allStates.filter(stateName => 
