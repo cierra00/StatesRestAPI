@@ -73,7 +73,14 @@ const getAdmission = async(req, res) =>{
 }
 
 const createNewFunfacts = async(req, res) =>{
-    console.log(req);
+    const code = req.code;
+    const { funfacts } = req?.body;
+
+    if (!funfacts){
+        return res.status(400).json({ 
+            'message': 'State fun facts value required' 
+        })
+    }
 }
 const updateState = async(req, res) =>{
     const code = req.code
