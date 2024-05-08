@@ -4,7 +4,6 @@ const path = require('path');
 const statesController  = require ('../../controllers/statesController');
 const validateState = require('../../middleware/validateState');
 
-
 router.route('/')
     .get(statesController.getAllStates)
     
@@ -26,10 +25,6 @@ router.route('/')
     router.route('/:state/population')
     .get(validateState(), statesController.getPopulation)
     router.route('/:state/admission')
-    .get(validateState(), statesController.getAdmission)    
+    .get(validateState(), statesController.getAdmission)  
    
-
-
-
-
 module.exports = router;
