@@ -43,8 +43,11 @@ const getFunFact = async(req, res) =>{
     const dbState = await State.findOne({ stateCode: code }).exec();
 
     if (dbState.funfacts?.length < 1) { 
-       const randomFunfact = dbState[Math.floor()* dbState.funfacts.length];
+        return res.status(404).json({ 
+            'message': `No Fun Facts found for ${data.state}`
+         });
     }
+    const randomFunfact = dbState[Math.floor()* dbState.funfacts.length];
     return res.json({'funfact': randomFunfact})
 }
 const getCapital = async(req, res) =>{
