@@ -116,7 +116,7 @@ const updateState = async(req, res) =>{
 
     if (!funfact) return res.status(400).json({ 'message': 'State fun fact value required' })
 
-    const state = statesJSONData.find(state => state.code === code)
+    const state = statesData.find(state => state.code === code)
 
    
     const savedState = await State.findOne({ stateCode: code }).exec();
