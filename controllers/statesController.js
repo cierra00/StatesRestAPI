@@ -109,7 +109,7 @@ const createNewFunfacts = async(req, res) =>{
 const updateState = async(req, res) =>{
     const code = req.code;
     let { index, funfact } = req?.body;
-    index -= 1;
+    index = index - 1;
 
     if (!index){
         return res.status(400).json({ 
@@ -119,9 +119,7 @@ const updateState = async(req, res) =>{
    if (!funfact){
         return res.status(400).json({ 'message': 'State fun fact value required' })
     }
-
     const state = statesData.find(state => state.code === code)
-
     const statesDB = await State.findOne({ stateCode: code }).exec();
 
     if (!statesDB?.funfacts?.length){
