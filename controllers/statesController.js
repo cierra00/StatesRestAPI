@@ -42,12 +42,6 @@ const getFunFact = async(req, res) =>{
     const data = statesData.find(stateName => stateName.code === code);
     const dbState = await State.findOne({ stateCode: code }).exec();
 
-    if (!savedState?.funfacts?.length) {
-        return res.status(404).json({ 
-            'message': `No Fun Facts found for ${data.state}` 
-        });
-    }
-
     if (dbState.funfacts?.length < 1) { 
         return res.status(404).json({ 
             'message': `No Fun Facts found for ${data.state}`
