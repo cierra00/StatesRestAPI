@@ -69,7 +69,7 @@ const updateState = async(req, res) =>{
 const deleteState = async(req, res) =>{
     const code = req.code
 
-
+}
 module.exports = {
     getAllStates,
     getState,
