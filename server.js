@@ -12,14 +12,8 @@ const connectDB = require('./config/dbConn');
 /*Connect to DB*/
 connectDB();
 app.use(logger);
-// Cross Origin Resource Sharing
 
 app.use(cors());
-
-/*Built In Middleware to handle   Form Data
-  content-type: application/x-www-form-urlencoded
-*/
-// app.use(express.urlencoded({extended : false}));
 
 /* Handle JSON */
 app.use(express.json());
