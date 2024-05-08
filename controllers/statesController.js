@@ -1,7 +1,6 @@
 const State = require('../model/State');
 const  statesData = require('../model/statesData.json');
 
-
 const getAllStates =  async (req, res) =>{   
     const { contig } = req?.query; 
     let allStates = [...statesData];
@@ -35,7 +34,6 @@ const getState = async(req, res) =>{
     }
     return res.json(state)
 }
-
 
 const getFunFact = async(req, res) =>{
     const code = req.code;
@@ -81,7 +79,6 @@ const createNewFunfacts = async(req, res) =>{
             'message': 'State fun facts value required' 
         })
     }
-
     if (!Array.isArray(funfacts)){
         return res.status(400).json({ 
             'message': 'State fun facts value must be an array' 
@@ -166,8 +163,8 @@ const deleteState = async(req, res) =>{
     statesDB.funfacts = filteredData;
     const result = await statesDB.save(); 
     res.json(result)
-
 }
+
 module.exports = {
     getAllStates,
     getState,
