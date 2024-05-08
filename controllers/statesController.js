@@ -87,7 +87,6 @@ const createNewFunfacts = async(req, res) =>{
             'message': 'State fun facts value must be an array' 
         })
     }
-
     const dbState = await State.findOne({ stateCode: code }).exec();
 
     let result;
@@ -108,7 +107,37 @@ const createNewFunfacts = async(req, res) =>{
     }
 }
 const updateState = async(req, res) =>{
-    const code = req.code
+    const code = req.code;
+    let { index, funfact } = req?.body; 
+
+    if (!index){
+        return res.status(400).json({ 
+            'message': 'State fun fact index value required' 
+        })
+    }
+    if (!savedState?.funfacts?.length){
+        return res.status(404).json({ 
+            'message': `No Fun Facts found for ${state.state}` 
+        })
+    }
+    if (!savedState.funfacts[index-1]){
+        return res.status(404).json({ 
+            'message': `No Fun Fact found at that index for ${state.state}`
+         })
+    }    
+
+    if (!funfact){
+        return res.status(400).json({ 
+            'message': 'State fun fact value required'
+         })
+    }
+    
+    const state = statesData.find(state => state.code === code);
+    const dbState = await State.findOne({ stateCode: code }).exec();
+    dbState.funfacts[index-1] = funfact;
+    
+    const result = await dbState.save();
+    res.json(result)
 }
 const deleteState = async(req, res) =>{
     const code = req.code
