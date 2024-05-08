@@ -47,7 +47,8 @@ const getFunFact = async(req, res) =>{
             'message': `No Fun Facts found for ${data.state}`
          });
     }
-    const randomFunfact = dbState[Math.floor(Math.random()* dbState.funfacts.length)];
+    const INDEX = Math.floor(Math.random() * dbState.funfacts.length);
+    const randomFunfact = dbState.funfacts[INDEX];
     return res.json({'funfact': randomFunfact})
 }
 const getCapital = async(req, res) =>{
